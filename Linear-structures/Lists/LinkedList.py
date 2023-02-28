@@ -21,8 +21,8 @@ class Linked_list():
     def is_empty_list(self):
         return self.head.next==None
 
-    def insert_item(self, item, position):
-    
+    def insert_item(self, data, position=None):
+        item=Node(data)
         #The element is inserted at the begining
         if (position)==self.head.next:
             item.next=self.head.next
@@ -42,33 +42,34 @@ class Linked_list():
         i.next=item
         item.next=position
 
-    def delete_item(self,item):
+    def delete_item(self,data):
         
         if (self.is_empty_list()): 
             raise Exception("Empty List")
-
+        
+        i=self.head.next
         #If the element to delete is at the begining
-        if (self.head.next==item): 
-            self.head.next=item.next
+        if (i.data==data): 
+            self.head.next=i.next
             return
 
         #Any other case
-        i=self.head.next
-        while (i.next!=None and i.next!=item):
+        while (i.next!=None and i.next.data!=data):
             i=i.next
         if (i.next==None): 
             raise Exception("No such element")
           
-        i.next=item.next
+        i.next=(i.next).next
         
 
-    def find_item(self,data)-> Node: 
+    def find_item(self,data): 
         i=self.head
         while (i!=None and i.data!=data):
             i=i.next
         if (i!=None):
-            return i.data
-        print("The element doesn't exist in the list")
+            return i
+        raise Exception("No such element")
+
 
 
 

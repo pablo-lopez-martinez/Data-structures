@@ -19,8 +19,9 @@ class DoubleLinkedList():
     def is_empty_list(self):
         return self.head.next==None
     
-    def insert_item(self, item, position=None):
-    
+    def insert_item(self, data, position=None):
+        
+        item=Node(data)
         #The element is inserted at the end 
         if (position==None):
             i=self.head
@@ -39,26 +40,50 @@ class DoubleLinkedList():
 
 
         #The element is inserted in the middle
+        #Through double linking the list its way easier than with simple linked list
         prev=position.prev
         position.prev=item
         item.next=position
         item.prev=prev
-        prev.next=position
+        prev.next=item
+
+    def find_item(self,data):
+        i=self.head
+        while (i!=None and i.data!=data):
+            i=i.next
+        if (i!=None):
+            return i
+        raise Exception("No such element")
+    
+    def delete_item(self,data):
+        if (self.is_empty_list()): 
+            raise Exception("Empty List")
+        
+        i=self.head.next
+        #If the element to delete is at the begining
+        if (i.data==data): 
+            i.next.prev=i
+            self.head.next=i.next
+            return
+
+        #Any other case
+        i=self.find_item(data)
+        prev=i.prev
+        prev.next=i.next
+        i.next.prev=prev
             
 
         
 list=DoubleLinkedList()
 
-node1=Node(1)
-node2=Node(2)
-node3=Node(4)
-node4=Node(6)
-node5=Node(5)
-list.insert_item(node1)
-list.insert_item(node2)
-list.insert_item(node3)
-list.insert_item(node4)
-list.insert_item(node5,node1)
+list.insert_item(1)
+list.insert_item(2)
+list.insert_item(3)
+list.insert_item(4)
+list.insert_item(5)
+list.print_list()
+list.delete_item(4)
+list.delete_item(1)
 list.print_list()
 
         

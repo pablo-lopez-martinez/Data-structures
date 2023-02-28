@@ -14,15 +14,13 @@ class Queue():
     
     def enqueue(self,item):
         if (self.size==MAX_SIZE):
-            print("Full queue")
-            return
+            raise Exception("Full queue")
         self.queue.append(item)
         self.size+=1
 
     def dequeue(self):
         if (self.is_empty()):
-            print("Empty queue")
-            return
+            raise Exception("Empty queue")
         self.size-=1
         return self.queue.pop(0)
             
