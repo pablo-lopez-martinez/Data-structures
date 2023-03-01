@@ -74,16 +74,6 @@ class DoubleLinkedList():
             
 
         
-list=DoubleLinkedList()
 
-list.insert_item(1)
-list.insert_item(2)
-list.insert_item(3)
-list.insert_item(4)
-list.insert_item(5)
-list.print_list()
-list.delete_item(4)
-list.delete_item(1)
-list.print_list()
 
         
